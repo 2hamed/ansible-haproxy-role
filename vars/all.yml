@@ -18,9 +18,9 @@ backends:
       - httpchk GET /healthz
       - redispatch
     servers:
-      - hostname: sattar-02.app.afra.snapp.infra
-        address: 172.16.76.102:80
+      - hostname: backend-node-01
+        address: 192.168.10.1:80
         options: check fall 1 rise 5 downinter 3000ms observe layer7 on-error mark-down
-      - hostname: sattar-03.app.afra.snapp.infra
-        address: 172.16.76.103:80
+      - hostname: backend-node-02
+        address: 192.168.10.2:80
         options: check fall 1 rise 5 downinter 3000ms observe layer7 on-error mark-down
