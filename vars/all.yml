@@ -1,0 +1,26 @@
+frontends:
+  - name: frontend_name
+    bind_address: 0.0.0.0:80
+    default_backend: backend_name
+  - name: stats
+    bind_address: 0.0.0.0:80
+    stats:
+      enable: enable
+      uri: /stats
+      refresh: 10s
+      auth: admin:123456
+
+backends:
+  - name: backend_name
+    balance: roundrobin
+    retry_on: all-retryable-errors
+    options:
+      - httpchk GET /healthz
+      - redispatch
+    servers:
+      - hostname: sattar-02.app.afra.snapp.infra
+        address: 172.16.76.102:80
+        options: check fall 1 rise 5 downinter 3000ms observe layer7 on-error mark-down
+      - hostname: sattar-03.app.afra.snapp.infra
+        address: 172.16.76.103:80
+        options: check fall 1 rise 5 downinter 3000ms observe layer7 on-error mark-down
