@@ -1,3 +1,7 @@
+timeout_connect: 5000
+timeout_client: 5000
+timeout_server: 5000
+
 frontends:
   - name: frontend_name
     bind_address: 0.0.0.0:80
